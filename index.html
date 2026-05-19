@@ -3,26 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Homenagem Especial</title>
+    <title>Para Karen</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f9f1f2;
+            background-color: #e98fdd;
             color: #333;
             text-align: center;
             margin: 0;
             padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 90vh;
         }
         .container {
             max-width: 600px;
             background: white;
-            margin: 40px auto;
             padding: 30px;
             border-radius: 15px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            width: 100%;
         }
         h1 {
-            color: #d14949;
+            color: #d889d4;
         }
         p {
             font-size: 1.1em;
@@ -33,23 +37,132 @@
             height: 150px;
             border-radius: 50%;
             object-fit: cover;
-            border: 3px solid #d14949;
+            border: 3px solid #d889d4;
+            margin-bottom: 15px;
+        }
+        /* Estilo dos Botões Gerais */
+        .botao {
+            background-color: #d889d4;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1em;
+            border-radius: 25px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: background 0.3s;
+        }
+        .botao:hover {
+            background-color: #d889d4;
+        }
+        
+        /* Estilo específico para o botão de trocar gatinhos */
+        .botao-gatinho {
+            background-color: #ff9a9e;
+            color: #333;
+            font-weight: bold;
+        }
+        .botao-gatinho:hover {
+            background-color: #d889d4;
+        }
+
+        /* Container para colocar botões lado a lado */
+        .botoes-acao {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        /* Estilo dos botões do Spotify */
+        .spotify-link {
+            display: inline-block;
+            background-color: #1DB954; /* Verde do Spotify */
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            margin: 10px 5px;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+        .spotify-link:hover {
+            background-color: #1ed760;
+            transform: scale(1.05); /* Dá uma leve crescida ao passar o mouse */
+        }
+
+        /* Lógica para esconder e mostrar as telas */
+        .passo { display: none; }
+        .ativo {
+            display: block;
+            animation: fadeIn 0.8s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <img src="Nos.jpg" alt="Foto da Karen" class="foto-perfil">
         
-        <h1>Para Karen Ferreira Bispo dos Santos</h1>
-        
-        <p>Eu sei que atualmente não estamos em um momento bom da nossa relação, mas gostaria de tentar descrever o quanto eu gosto de você Karen bispo.
-            o quanto eu te admiro e o quanto eu sou feliz com você, então eu estou fazendo isso como um gesto de carinho, para te mostrar boa parte do que eu sinto por você.
-        </p>
-        
-        <p><em>"Obrigado por ser minha bocó"</em></p>
+        <div id="passo-1" class="passo ativo">
+            <img src="Nos.jpg" alt="Foto da Karen" class="foto-perfil">
+            <h1>Para Karen Ferreira Bispo dos Santos</h1>
+            <p>Eu sei que atualmente não estamos em um momento bom da nossa relação,
+             mas gostaria de tentar descrever o quanto eu gosto de você Karen bispo. O quanto eu te admiro e o quanto eu sou feliz com você, então eu estou fazendo isso como um gesto de carinho, para te mostrar boa parte do que eu sinto por você.</p>
+            <button class="botao" onclick="mudarPasso(1, 2)">Clique aqui para continuar ➔</button>
+        </div>
+
+        <div id="passo-2" class="passo">
+            <img id="img-gatinho" src="https://cataas.com/cat" alt="Gatinho Fofo" class="foto-perfil">
+            
+            <h1>Coisas que me lembram você...</h1>
+            <p>Algo que é muito sua cara são gatinhos fofos, e sinceramente algo que eu admiro muito em você, então se divirta apertando nesse botão</p>
+            <p><em>(Aperte o botão abaixo)</em></p>
+            
+            <div class="botoes-acao">
+                <button class="botao botao-gatinho" onclick="mudarGatinho()">Ver outro gatinho</button>
+                <button class="botao" onclick="mudarPasso(2, 3)">Avançar ➔</button>
+            </div>
+        </div>
+
+        <div id="passo-3" class="passo">
+            <img src="Nos.jpg" alt="Nossa Foto" class="foto-perfil">
+            <h1>A música diz tudo</h1>
+            <p>Como nem só de palavras vive o homem, gostaria de separar algumas musicas que me lembram de você.
+            </p>
+            
+            <a href="https://open.spotify.com/intl-pt/track/5T9QnISeG2Q6Ysu9HbaAzS?si=64351feb6e814dad" target="_blank" class="spotify-link">Dialogo - Yunk Vino</a>
+            <a href="https://open.spotify.com/intl-pt/track/0sdPwPOYj1W5SDSWDWmp46?si=25cea7a2067c4621" target="_blank" class="spotify-link">Pensando em mim - Matchola feat 22Diniz </a>
+       git a     <a href="https://open.spotify.com/intl-pt/track/5HpURubJUz2gysQiAkle9I?si=0da50eba04e84d21" target="_blank" class="spotify-link">Menina Mulher da pele preta - Jorge Ben Jor </a>
+            <a href="https://open.spotify.com/intl-pt/track/3iof6EclqePezHDibBiykI?si=1821a8c457e3470c" target="_blank" class="spotify-link">Oceano - Djavan </a>
+            <a href="https://open.spotify.com/intl-pt/track/1mSxbLW7fKABfeY4lGpg0E?si=e1c199d52e3e45eb" target="_blank" class="spotify-link">Velha infância - tribalhistas </a>
+            <a href="https://open.spotify.com/intl-pt/track/0F1FsfYvx7eyAC64EPzD7S?si=6c31b7a56c66495e" target="_blank" class="spotify-link">Da lua - Djonga </a>
+            <a href="https://open.spotify.com/intl-pt/track/31ySVMbs7U8LOuy7w4McR9?si=1151050fad824ed4" target="_blank" class="spotify-link">Só me ligar - bk' </a>
+
+            <br><br>
+            <p>Obrigado por ser tão especial para mim.</p>
+        </div>
+
     </div>
+
+    <script>
+        // Função para trocar de tela
+        function mudarPasso(passoAtual, proximoPasso) {
+            document.getElementById('passo-' + passoAtual).classList.remove('ativo');
+            document.getElementById('passo-' + proximoPasso).classList.add('ativo');
+        }
+
+        // Função para sortear um novo gatinho
+        function mudarGatinho() {
+            const imagem = document.getElementById('img-gatinho');
+            // O comando Date().getTime() cria um número único que força o navegador a buscar uma nova foto na internet
+            imagem.src = "https://cataas.com/cat?tempo=" + new Date().getTime();
+        }
+    </script>
 
 </body>
 </html>
