@@ -1,179 +1,417 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Para Karen</title>
     <style>
+      /* Estilo da foto do carrossel */
+      #img-carrossel {
+        width: 100%;
+        max-width: 500px;
+        height: 500px;
+        object-fit: cover;
+        border-radius: 15px;
+        border: 5px solid #d889d4;
+        margin-bottom: 15px;
+        transition: opacity 0.3s;
+      }
 
+      .botoes-carrossel {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-bottom: 20px;
+      }
 
-        .img-gatinho {
-            width: 600px; /* Você pode mudar esse número para o tamanho que quiser (ex: 400px) */
-            height: 600px; /* Importante manter igual à largura para a forma redonda funcionar bem */
-            object-fit: cover; /* Impede que a foto fique esticada ou deformada */
-            border-radius: 50%; /* Mantém o formato redondo, se preferir */
-            border: 5px solid #ff9a9e; /* Uma borda mais grossa com a cor dos gatinhos */
-        }
+      .img-gatinho {
+        width: 100%;
+        max-width: 450px;
+        height: 450px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 5px solid #ff9a9e;
+        display: block;
+        margin: 0 auto 20px auto;
+      }
 
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #e98fdd !important;
+        color: #333 !important;
+        text-align: center;
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 90vh;
+        overflow-y: auto !important;
+        align-items: flex-start !important;
+        padding: 40px 20px !important;
+      }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #e98fdd;
-            color: #333;
-            text-align: center;
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 90vh;
-        }
-        .container {
-            max-width: 600px;
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            width: 100%;
-        }
-        h1 {
-            color: #d889d4;
-        }
-        p {
-            font-size: 1.1em;
-            line-height: 1.6;
-        }
-        .foto-perfil {
-            width: 450px;
-            height: 450px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid #d889d4;
-            margin-bottom: 15px;
-        }
-        /* Estilo dos Botões Gerais */
-        .botao {
-            background-color: #d889d4;
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            font-size: 1em;
-            border-radius: 25px;
-            cursor: pointer;
-            margin-top: 15px;
-            transition: background 0.3s;
-        }
-        .botao:hover {
-            background-color: #d889d4;
-        }
-        
-        /* Estilo específico para o botão de trocar gatinhos */
-        .botao-gatinho {
-            background-color: #ff9a9e;
-            color: #333;
-            font-weight: bold;
-        }
-        .botao-gatinho:hover {
-            background-color: #d889d4;
-        }
+      .container {
+        max-width: 600px !important;
+        background: white !important;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        width: 100% !important;
+        position: relative;
+      }
 
-        /* Container para colocar botões lado a lado */
-        .botoes-acao {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-top: 20px;
-        }
+      h1 {
+        color: #d889d4 !important;
+      }
+      p {
+        font-size: 1.1em;
+        line-height: 1.6;
+      }
+      .foto-perfil {
+        width: 450px;
+        height: 450px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid #d889d4;
+        margin-bottom: 15px;
+      }
 
-        /* Estilo dos botões do Spotify */
-        .spotify-link {
-            display: inline-block;
-            background-color: #1DB954; /* Verde do Spotify */
-            color: white;
-            text-decoration: none;
-            padding: 12px 24px;
-            border-radius: 25px;
-            margin: 10px 5px;
-            font-weight: bold;
-            transition: transform 0.2s;
-        }
-        .spotify-link:hover {
-            background-color: #1ed760;
-            transform: scale(1.05); /* Dá uma leve crescida ao passar o mouse */
-        }
+      .playlist-spotify {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 8px;
+        margin: 12px 0;
+      }
 
-        /* Lógica para esconder e mostrar as telas */
-        .passo { display: none; }
-        .ativo {
-            display: block;
-            animation: fadeIn 0.8s ease-in-out;
+      .spotify-link {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        background-color: #1db954 !important;
+        color: white !important;
+        text-decoration: none;
+        padding: 10px 15px;
+        border-radius: 25px;
+        font-weight: bold;
+        font-size: 0.85em;
+        transition: transform 0.2s, background-color 0.2s;
+        text-align: center;
+      }
+
+      .spotify-link:hover {
+        background-color: #1ed760 !important;
+        transform: scale(1.03);
+      }
+
+      .botao {
+        background-color: #d889d4 !important;
+        color: white !important;
+        border: none;
+        padding: 12px 24px;
+        font-size: 1em;
+        border-radius: 25px;
+        cursor: pointer;
+        margin-top: 15px;
+        transition: background 0.3s;
+      }
+      .botao:hover {
+        background-color: #d889d4 !important;
+      }
+
+      .botao-gatinho {
+        background-color: #ff9a9e !important;
+        color: #333 !important;
+        font-weight: bold;
+      }
+
+      .botoes-acao {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 20px;
+      }
+
+      .passo {
+        display: none !important;
+      }
+
+      .passo.ativo {
+        display: block !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        animation: fadeIn 0.8s ease-in-out forwards;
+      }
+
+      .passo.ativo * {
+        opacity: 1 !important;
+        visibility: visible !important;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
         }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        to {
+          opacity: 1;
+          transform: translateY(0);
         }
+      }
+
+      /* =========================================================
+         CORREÇÃO PASSO 5 - NOITE EM TELA CHEIA E BUQUÊ PERFEITO
+         ========================================================= */
+      #passo-5 {
+        display: none !important;
+      }
+
+      /* Faz o passo 5 cobrir a TELA INTEIRA eliminando o fundo rosa e branco */
+      #passo-5.ativo {
+        display: flex !important;
+        position: fixed !important;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 99999;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        box-sizing: border-box;
+        padding: 20px !important;
+        overflow: hidden !important;
+        animation: fadeIn 1s ease-in-out forwards;
+      }
+
+      /* O CÉU NOTURNO COMO FUNDO REAL DA TELA */
+      #passo-5 .night {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        background: linear-gradient(to bottom, #070a12 0%, #140924 60%, #2c1230 100%);
+      }
+
+      /* TÍTULO E SUBTÍTULO */
+      #passo-5 h1 {
+        position: relative;
+        z-index: 10;
+        color: white !important;
+        margin-top: 0;
+        font-size: 2.2em;
+      }
+      
+      #passo-5 p {
+        position: relative;
+        z-index: 10;
+        color: rgba(255, 255, 255, 0.8) !important;
+        font-size: 1em;
+        margin-bottom: 20px;
+      }
+
+      #passo-5 h1.glow {
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.6), 0 0 20px rgba(216, 137, 212, 0.6);
+        animation: textGlow 2s ease-in-out infinite alternate;
+      }
+
+      @keyframes textGlow {
+        to { text-shadow: 0 0 20px rgba(255, 255, 255, 1), 0 0 30px rgba(216, 137, 212, 1); }
+      }
+
+      /* Ajuste da imagem do Buquê para não criar quadrado */
+      .img-flor {
+        width: 100%;
+        max-width: 280px;
+        height: auto;
+        position: relative;
+        z-index: 10;
+        margin-bottom: 20px;
+        /* drop-shadow coloca o brilho contornando as flores, e não um quadrado! */
+        filter: drop-shadow(0 0 20px rgba(255, 154, 158, 0.6)); 
+      }
+
+      /* PARTÍCULAS (PÓLEN DE ESTRELAS) */
+      .particles {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 2;
+        pointer-events: none;
+        overflow: hidden;
+      }
+
+      .particle {
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        background-color: white;
+        border-radius: 50%;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 15px rgba(216, 137, 212, 0.8);
+        opacity: 0;
+      }
+
+      .p1 { left: 10%; top: -10px; animation-duration: 4s; }
+      .p2 { left: 30%; top: -10px; animation-duration: 6s; animation-delay: 1s; }
+      .p3 { left: 50%; top: -10px; animation-duration: 5s; animation-delay: 2s; }
+      .p4 { left: 70%; top: -10px; animation-duration: 7s; animation-delay: 0.5s; }
+      .p5 { left: 90%; top: -10px; animation-duration: 4.5s; animation-delay: 1.5s; }
+
+      @keyframes falling {
+        0% { transform: translateY(-10px); opacity: 0; }
+        20% { opacity: 0.8; }
+        90% { opacity: 0.8; }
+        100% { transform: translateY(100vh); opacity: 0; }
+      }
     </style>
-</head>
-<body>
-
+  </head>
+  <body>
     <div class="container">
+      <div id="passo-1" class="passo ativo">
+        <img src="Nos.jpg" alt="Foto da Karen" class="foto-perfil" />
+        <h1>Para Karen Ferreira Bispo dos Santos</h1>
+        <p>
+          Eu sei que atualmente não estamos em um momento bom da nossa relação,
+          mas gostaria de tentar descrever o quanto eu gosto de você Karen
+          bispo. O quanto eu te admiro e o quanto eu sou feliz com você, então
+          eu estou fazendo isso como um gesture de carinho, para te mostrar boa
+          parte do que eu sinto por você.
+        </p>
+        <button class="botao" onclick="mudarPasso(1, 2)">
+          Clique aqui para continuar ➔
+        </button>
+      </div>
+
+      <div id="passo-2" class="passo">
+        <img id="img-gatinho" src="https://cataas.com/cat" alt="Gatinho Fofo" class="img-gatinho" />
+        <h1>Coisas que me lembram você...</h1>
+        <p>
+          Algo que é muito sua cara são gatinhos fofos, e sinceramente o amor
+          que você tem pela tasha é algo que eu admiro muito em você, então se
+          divirta apertando nesse botão
+        </p>
+        <p><em>(Aperte o botão abaixo)</em></p>
+        <div class="botoes-acao">
+          <button class="botao botao-gatinho" onclick="mudarGatinho()">
+            Ver outro gatinho
+          </button>
+          <button class="botao" onclick="mudarPasso(2, 3)">Avançar ➔</button>
+        </div>
+      </div>
+
+      <div id="passo-3" class="passo">
+        <img src="nos_2.jpg" alt="Nossa Foto" class="foto-perfil" />
+        <h1>A música diz tudo</h1>
+        <p>
+          Como nem só de palavras vive o homem, gostaria de separar algumas
+          músicas que me lembram de você.
+        </p>
+        <div class="playlist-spotify">
+          <a href="https://open.spotify.com/intl-pt/track/5T9QnISeG2Q6Ysu9HbaAzS?si=64351feb6e814dad" target="_blank" class="spotify-link">Dialogo - Yunk Vino</a>
+          <a href="https://open.spotify.com/intl-pt/track/0sdPwPOYj1W5SDSWDWmp46?si=25cea7a2067c4621" target="_blank" class="spotify-link">Pensando em mim - Matchola feat 22Diniz</a>
+          <a href="https://open.spotify.com/intl-pt/track/5HpURubJUz2gysQiAkle9I?si=0da50eba04e84d21" target="_blank" class="spotify-link">Menina Mulher da pele preta - Jorge Ben Jor</a>
+          <a href="https://open.spotify.com/intl-pt/track/3iof6EclqePezHDibBiykI?si=1821a8c457e3470c" target="_blank" class="spotify-link">Oceano - Djavan</a>
+          <a href="https://open.spotify.com/intl-pt/track/1mSxbLW7fKABfeY4lGpg0E?si=e1c199d52e3e45eb" target="_blank" class="spotify-link">Velha infância - tribalhistas</a>
+          <a href="https://open.spotify.com/intl-pt/track/0F1FsfYvx7eyAC64EPzD7S?si=6c31b7a56c66495e" target="_blank" class="spotify-link">Da lua - Djonga</a>
+          <a href="https://open.spotify.com/intl-pt/track/31ySVMbs7U8LOuy7w4McR9?si=1151050fad824ed4" target="_blank" class="spotify-link">Só me ligar - bk'</a>
+        </div>
+        <button class="botao" onclick="mudarPasso(3, 4)">Avançar ➔</button>
+      </div>
+
+      <div id="passo-4" class="passo">
+        <h1>Alguns dos nossos momentos</h1>
+        <p>
+          Sem duvidas cada foto foi um momento muito bom ao seu lado, que eu
+          guardo com muito mas muito carinho, você me fez e faz tão feliz que eu
+          queria dedicar esse espaço para relembrar um pouco desses momentos.
+        </p>
+        <img id="img-carrossel" src="fotos/1.jpg" alt="Nossos Momentos" />
+        <div class="botoes-carrossel">
+          <button class="botao" onclick="mudarFoto(-1)">Anterior</button>
+          <button class="botao" onclick="mudarFoto(1)">Próxima</button>
+        </div>
+        <button class="botao" onclick="mudarPasso(4, 5)">
+          Ver a última página ➔
+        </button>
+      </div>
+    </div>
+
+    <div id="passo-5" class="passo">
+      <div class="night"></div>
+      
+      <h1 class="glow">Para você</h1>
+      <p>Flores digitais com todo meu amor.</p>
+
+      <img src="flor.png" alt="Buquê de Rosas para Karen" class="img-flor" />
         
-        <div id="passo-1" class="passo ativo">
-            <img src="Nos.jpg" alt="Foto da Karen" class="foto-perfil">
-            <h1>Para Karen Ferreira Bispo dos Santos</h1>
-            <p>Eu sei que atualmente não estamos em um momento bom da nossa relação,
-             mas gostaria de tentar descrever o quanto eu gosto de você Karen bispo. O quanto eu te admiro e o quanto eu sou feliz com você, então eu estou fazendo isso como um gesto de carinho, para te mostrar boa parte do que eu sinto por você.</p>
-            <button class="botao" onclick="mudarPasso(1, 2)">Clique aqui para continuar ➔</button>
-        </div>
-
-        <div id="passo-2" class="passo">
-            <img id="img-gatinho" src="https://cataas.com/cat" alt="Gatinho Fofo" class="img-gatinho">
-            
-            <h1>Coisas que me lembram você...</h1>
-            <p>Algo que é muito sua cara são gatinhos fofos, e sinceramente o amor que você tem pela tasha é algo que eu admiro muito em você, então se divirta apertando nesse botão</p>
-            <p><em>(Aperte o botão abaixo)</em></p>
-            
-            <div class="botoes-acao">
-                <button class="botao botao-gatinho" onclick="mudarGatinho()">Ver outro gatinho</button>
-                <button class="botao" onclick="mudarPasso(2, 3)">Avançar ➔</button>
-            </div>
-        </div>
-
-        <div id="passo-3" class="passo">
-            <img src="nos_2.jpg" alt="Nossa Foto" class="foto-perfil">
-            <h1>A música diz tudo</h1>
-            <p>Como nem só de palavras vive o homem, gostaria de separar algumas musicas que me lembram de você.
-            </p>
-            
-            <a href="https://open.spotify.com/intl-pt/track/5T9QnISeG2Q6Ysu9HbaAzS?si=64351feb6e814dad" target="_blank" class="spotify-link">Dialogo - Yunk Vino</a>
-            <a href="https://open.spotify.com/intl-pt/track/0sdPwPOYj1W5SDSWDWmp46?si=25cea7a2067c4621" target="_blank" class="spotify-link">Pensando em mim - Matchola feat 22Diniz </a>
-            <a href="https://open.spotify.com/intl-pt/track/5HpURubJUz2gysQiAkle9I?si=0da50eba04e84d21" target="_blank" class="spotify-link">Menina Mulher da pele preta - Jorge Ben Jor </a>
-            <a href="https://open.spotify.com/intl-pt/track/3iof6EclqePezHDibBiykI?si=1821a8c457e3470c" target="_blank" class="spotify-link">Oceano - Djavan </a>
-            <a href="https://open.spotify.com/intl-pt/track/1mSxbLW7fKABfeY4lGpg0E?si=e1c199d52e3e45eb" target="_blank" class="spotify-link">Velha infância - tribalhistas </a>
-            <a href="https://open.spotify.com/intl-pt/track/0F1FsfYvx7eyAC64EPzD7S?si=6c31b7a56c66495e" target="_blank" class="spotify-link">Da lua - Djonga </a>
-            <a href="https://open.spotify.com/intl-pt/track/31ySVMbs7U8LOuy7w4McR9?si=1151050fad824ed4" target="_blank" class="spotify-link">Só me ligar - bk' </a>
-
-            <br><br>
-            <p>Obrigado por ser tão especial para mim.</p>
-        </div>
-
+      <div class="particles">
+        <div class="particle p1"></div>
+        <div class="particle p2"></div>
+        <div class="particle p3"></div>
+        <div class="particle p4"></div>
+        <div class="particle p5"></div>
+      </div>
     </div>
 
     <script>
-        // Função para trocar de tela
-        function mudarPasso(passoAtual, proximoPasso) {
-            document.getElementById('passo-' + passoAtual).classList.remove('ativo');
-            document.getElementById('passo-' + proximoPasso).classList.add('ativo');
+      function mudarPasso(passoAtual, proximoPasso) {
+        // Se estiver no container antigo, remove o ativo
+        if(document.getElementById("passo-" + passoAtual)) {
+          document.getElementById("passo-" + passoAtual).classList.remove("ativo");
+        }
+        
+        // Ativa o próximo passo
+        document.getElementById("passo-" + proximoPasso).classList.add("ativo");
+
+        // SE O PRÓXIMO PASSO FOR O ÚLTIMO (TELA 5)
+        if (proximoPasso === 5) {
+          setTimeout(() => {
+            // Ativa o efeito de estrelas caindo
+            document.querySelectorAll('.particle').forEach(p => {
+              p.style.animationName = 'falling';
+              p.style.animationIterationCount = 'infinite';
+              p.style.animationTimingFunction = 'linear';
+            });
+          }, 400);
+        }
+      }
+
+      function mudarGatinho() {
+        const imagem = document.getElementById("img-gatinho");
+        imagem.src =
+          "https://cataas.com/cat?width=600&height=600&tempo=" +
+          new Date().getTime();
+      }
+
+      const minhasFotos = [
+        "fotos/1.jpg",
+        "fotos/2.jpg",
+        "fotos/3.jpg",
+        "fotos/4.jpg",
+        "fotos/5.jpg",
+        "fotos/6.jpg",
+        "fotos/7.jpg",
+        "fotos/8.jpg",
+      ];
+
+      let fotoAtual = 0;
+
+      function mudarFoto(direcao) {
+        fotoAtual = fotoAtual + direcao;
+
+        if (fotoAtual >= minhasFotos.length) {
+          fotoAtual = 0;
+        } else if (fotoAtual < 0) {
+          fotoAtual = minhasFotos.length - 1;
         }
 
-        // Função para sortear um novo gatinho
-        function mudarGatinho() {
-            const imagem = document.getElementById('img-gatinho');
-            // O comando Date().getTime() cria um número único que força o navegador a buscar uma nova foto na internet
-            imagem.src = "https://cataas.com/cat?tempo=" + new Date().getTime();
-        }
+        document.getElementById("img-carrossel").src = minhasFotos[fotoAtual];
+      }
     </script>
-
-</body>
+  </body>
 </html>
