@@ -95,7 +95,9 @@
         border-radius: 25px;
         font-weight: bold;
         font-size: 0.85em;
-        transition: transform 0.2s, background-color 0.2s;
+        transition:
+          transform 0.2s,
+          background-color 0.2s;
         text-align: center;
       }
 
@@ -193,7 +195,12 @@
         top: 0;
         left: 0;
         z-index: 1;
-        background: linear-gradient(to bottom, #070a12 0%, #140924 60%, #2c1230 100%);
+        background: linear-gradient(
+          to bottom,
+          #070a12 0%,
+          #140924 60%,
+          #2c1230 100%
+        );
       }
 
       /* TÍTULO E SUBTÍTULO */
@@ -204,7 +211,7 @@
         margin-top: 0;
         font-size: 2.2em;
       }
-      
+
       #passo-5 p {
         position: relative;
         z-index: 10;
@@ -214,12 +221,18 @@
       }
 
       #passo-5 h1.glow {
-        text-shadow: 0 0 10px rgba(255, 255, 255, 0.6), 0 0 20px rgba(216, 137, 212, 0.6);
+        text-shadow:
+          0 0 10px rgba(255, 255, 255, 0.6),
+          0 0 20px rgba(216, 137, 212, 0.6);
         animation: textGlow 2s ease-in-out infinite alternate;
       }
 
       @keyframes textGlow {
-        to { text-shadow: 0 0 20px rgba(255, 255, 255, 1), 0 0 30px rgba(216, 137, 212, 1); }
+        to {
+          text-shadow:
+            0 0 20px rgba(255, 255, 255, 1),
+            0 0 30px rgba(216, 137, 212, 1);
+        }
       }
 
       /* Ajuste da imagem do Buquê para não criar quadrado */
@@ -231,7 +244,7 @@
         z-index: 10;
         margin-bottom: 20px;
         /* drop-shadow coloca o brilho contornando as flores, e não um quadrado! */
-        filter: drop-shadow(0 0 20px rgba(255, 154, 158, 0.6)); 
+        filter: drop-shadow(0 0 20px rgba(255, 154, 158, 0.6));
       }
 
       /* PARTÍCULAS (PÓLEN DE ESTRELAS) */
@@ -252,21 +265,108 @@
         height: 6px;
         background-color: white;
         border-radius: 50%;
-        box-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 15px rgba(216, 137, 212, 0.8);
+        box-shadow:
+          0 0 10px rgba(255, 255, 255, 0.8),
+          0 0 15px rgba(216, 137, 212, 0.8);
         opacity: 0;
       }
 
-      .p1 { left: 10%; top: -10px; animation-duration: 4s; }
-      .p2 { left: 30%; top: -10px; animation-duration: 6s; animation-delay: 1s; }
-      .p3 { left: 50%; top: -10px; animation-duration: 5s; animation-delay: 2s; }
-      .p4 { left: 70%; top: -10px; animation-duration: 7s; animation-delay: 0.5s; }
-      .p5 { left: 90%; top: -10px; animation-duration: 4.5s; animation-delay: 1.5s; }
+      .p1 {
+        left: 10%;
+        top: -10px;
+        animation-duration: 4s;
+      }
+      .p2 {
+        left: 30%;
+        top: -10px;
+        animation-duration: 6s;
+        animation-delay: 1s;
+      }
+      .p3 {
+        left: 50%;
+        top: -10px;
+        animation-duration: 5s;
+        animation-delay: 2s;
+      }
+      .p4 {
+        left: 70%;
+        top: -10px;
+        animation-duration: 7s;
+        animation-delay: 0.5s;
+      }
+      .p5 {
+        left: 90%;
+        top: -10px;
+        animation-duration: 4.5s;
+        animation-delay: 1.5s;
+      }
 
       @keyframes falling {
-        0% { transform: translateY(-10px); opacity: 0; }
-        20% { opacity: 0.8; }
-        90% { opacity: 0.8; }
-        100% { transform: translateY(100vh); opacity: 0; }
+        0% {
+          transform: translateY(-10px);
+          opacity: 0;
+        }
+        20% {
+          opacity: 0.8;
+        }
+        90% {
+          opacity: 0.8;
+        }
+        100% {
+          transform: translateY(100vh);
+          opacity: 0;
+        }
+      }
+
+      /* =========================================================
+   AJUSTES EXCLUSIVOS PARA CELULAR (TELAS ATÉ 600PX)
+   ========================================================= */
+      @media (max-width: 600px) {
+        body {
+          padding: 20px 10px !important;
+        }
+
+        .container {
+          padding: 20px 15px;
+        }
+
+        h1 {
+          font-size: 1.6em !important;
+        }
+
+        p {
+          font-size: 1em;
+        }
+
+        /* Reduz as fotos redondas para caberem em qualquer celular sem perder o círculo perfeito */
+        .foto-perfil,
+        .img-gatinho {
+          width: 75vw !important;
+          height: 75vw !important;
+          max-width: 300px !important;
+          max-height: 300px !important;
+        }
+
+        /* Ajusta o carrossel de fotos dos momentos de vocês */
+        #img-carrossel {
+          max-width: 100% !important;
+          height: auto !important;
+          max-height: 320px !important;
+        }
+
+        /* Ajustes para a tela final da noite no celular */
+        #passo-5 h1 {
+          font-size: 1.8em !important;
+        }
+
+        .img-flor {
+          max-width: 200px !important; /* Diminui um pouco o buquê no celular para dar respiro */
+        }
+
+        /* Deixa os botões do spotify um pouco mais confortáveis para tocar com o polegar */
+        .playlist-spotify {
+          grid-template-columns: 1fr;
+        }
       }
     </style>
   </head>
@@ -288,7 +388,12 @@
       </div>
 
       <div id="passo-2" class="passo">
-        <img id="img-gatinho" src="https://cataas.com/cat" alt="Gatinho Fofo" class="img-gatinho" />
+        <img
+          id="img-gatinho"
+          src="https://cataas.com/cat"
+          alt="Gatinho Fofo"
+          class="img-gatinho"
+        />
         <h1>Coisas que me lembram você...</h1>
         <p>
           Algo que é muito sua cara são gatinhos fofos, e sinceramente o amor
@@ -312,13 +417,48 @@
           músicas que me lembram de você.
         </p>
         <div class="playlist-spotify">
-          <a href="https://open.spotify.com/intl-pt/track/5T9QnISeG2Q6Ysu9HbaAzS?si=64351feb6e814dad" target="_blank" class="spotify-link">Dialogo - Yunk Vino</a>
-          <a href="https://open.spotify.com/intl-pt/track/0sdPwPOYj1W5SDSWDWmp46?si=25cea7a2067c4621" target="_blank" class="spotify-link">Pensando em mim - Matchola feat 22Diniz</a>
-          <a href="https://open.spotify.com/intl-pt/track/5HpURubJUz2gysQiAkle9I?si=0da50eba04e84d21" target="_blank" class="spotify-link">Menina Mulher da pele preta - Jorge Ben Jor</a>
-          <a href="https://open.spotify.com/intl-pt/track/3iof6EclqePezHDibBiykI?si=1821a8c457e3470c" target="_blank" class="spotify-link">Oceano - Djavan</a>
-          <a href="https://open.spotify.com/intl-pt/track/1mSxbLW7fKABfeY4lGpg0E?si=e1c199d52e3e45eb" target="_blank" class="spotify-link">Velha infância - tribalhistas</a>
-          <a href="https://open.spotify.com/intl-pt/track/0F1FsfYvx7eyAC64EPzD7S?si=6c31b7a56c66495e" target="_blank" class="spotify-link">Da lua - Djonga</a>
-          <a href="https://open.spotify.com/intl-pt/track/31ySVMbs7U8LOuy7w4McR9?si=1151050fad824ed4" target="_blank" class="spotify-link">Só me ligar - bk'</a>
+          <a
+            href="https://open.spotify.com/intl-pt/track/5T9QnISeG2Q6Ysu9HbaAzS?si=64351feb6e814dad"
+            target="_blank"
+            class="spotify-link"
+            >Dialogo - Yunk Vino</a
+          >
+          <a
+            href="https://open.spotify.com/intl-pt/track/0sdPwPOYj1W5SDSWDWmp46?si=25cea7a2067c4621"
+            target="_blank"
+            class="spotify-link"
+            >Pensando em mim - Matchola feat 22Diniz</a
+          >
+          <a
+            href="https://open.spotify.com/intl-pt/track/5HpURubJUz2gysQiAkle9I?si=0da50eba04e84d21"
+            target="_blank"
+            class="spotify-link"
+            >Menina Mulher da pele preta - Jorge Ben Jor</a
+          >
+          <a
+            href="https://open.spotify.com/intl-pt/track/3iof6EclqePezHDibBiykI?si=1821a8c457e3470c"
+            target="_blank"
+            class="spotify-link"
+            >Oceano - Djavan</a
+          >
+          <a
+            href="https://open.spotify.com/intl-pt/track/1mSxbLW7fKABfeY4lGpg0E?si=e1c199d52e3e45eb"
+            target="_blank"
+            class="spotify-link"
+            >Velha infância - tribalhistas</a
+          >
+          <a
+            href="https://open.spotify.com/intl-pt/track/0F1FsfYvx7eyAC64EPzD7S?si=6c31b7a56c66495e"
+            target="_blank"
+            class="spotify-link"
+            >Da lua - Djonga</a
+          >
+          <a
+            href="https://open.spotify.com/intl-pt/track/31ySVMbs7U8LOuy7w4McR9?si=1151050fad824ed4"
+            target="_blank"
+            class="spotify-link"
+            >Só me ligar - bk'</a
+          >
         </div>
         <button class="botao" onclick="mudarPasso(3, 4)">Avançar ➔</button>
       </div>
@@ -343,12 +483,12 @@
 
     <div id="passo-5" class="passo">
       <div class="night"></div>
-      
+
       <h1 class="glow">Para você</h1>
       <p>Flores digitais com todo meu amor.</p>
 
       <img src="flor.png" alt="Buquê de Rosas para Karen" class="img-flor" />
-        
+
       <div class="particles">
         <div class="particle p1"></div>
         <div class="particle p2"></div>
@@ -361,10 +501,12 @@
     <script>
       function mudarPasso(passoAtual, proximoPasso) {
         // Se estiver no container antigo, remove o ativo
-        if(document.getElementById("passo-" + passoAtual)) {
-          document.getElementById("passo-" + passoAtual).classList.remove("ativo");
+        if (document.getElementById("passo-" + passoAtual)) {
+          document
+            .getElementById("passo-" + passoAtual)
+            .classList.remove("ativo");
         }
-        
+
         // Ativa o próximo passo
         document.getElementById("passo-" + proximoPasso).classList.add("ativo");
 
@@ -372,10 +514,10 @@
         if (proximoPasso === 5) {
           setTimeout(() => {
             // Ativa o efeito de estrelas caindo
-            document.querySelectorAll('.particle').forEach(p => {
-              p.style.animationName = 'falling';
-              p.style.animationIterationCount = 'infinite';
-              p.style.animationTimingFunction = 'linear';
+            document.querySelectorAll(".particle").forEach((p) => {
+              p.style.animationName = "falling";
+              p.style.animationIterationCount = "infinite";
+              p.style.animationTimingFunction = "linear";
             });
           }, 400);
         }
